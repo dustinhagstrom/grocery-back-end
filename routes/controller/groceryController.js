@@ -9,6 +9,39 @@ let getAllGroceries = async function (req, res) {
   }
 };
 
+let sortGroceryByDate = async function (req, res) {
+  try {
+    let sort = req.query.sort;
+    let sortOrder = sort === "desc" ? -1 : 1;
+    let foundGrocery = await Grocery.find({}).sort({ Date: sortOrder });
+    res.json({ payload: foundGrocery });
+  } catch (e) {
+    res.status(500).json({ message: e.message, error: e });
+  }
+};
+
+let sortGroceryByPurchased = async function (req, res) {
+  try {
+    let purchased = req.query.purchased;
+    let isPurchasedOrder = purchased === "true" ? true : false;
+    let sortByDate = req.query.sort ? req.query.sort : null;
+    let finalSort;
+    if (!sortByDate) {
+      finalSort = null;
+    } else {
+      finalSort = sortByDate === "asc" ? 1 : -1;
+    }
+    let foundGrocery = await Grocery.find({ purchased: isPurchasedOrder }).sort(
+      {
+        Date: finalSort,
+      }
+    );
+    res.json({ payload: foundGrocery });
+  } catch (e) {
+    res.status(500).json({ message: e.message, error: e });
+  }
+};
+
 let createNewGrocery = async function (req, res) {
   let { grocery } = req.body;
   try {
@@ -84,4 +117,6 @@ module.exports = {
   deleteGrocerybyID,
   updateGroceryWords,
   updateGroceryPurchased,
+  sortGroceryByDate,
+  sortGroceryByPurchased,
 };

@@ -8,10 +8,16 @@ const {
   deleteGrocerybyID,
   updateGroceryWords,
   updateGroceryPurchased,
+  sortGroceryByPurchased,
+  sortGroceryByDate,
 } = require("./controller/groceryController");
 
 /* GET home page. */
 router.get("/get-all-groceries", getAllGroceries);
+
+router.get("/sort-groceries-date", sortGroceryByDate);
+
+router.get("/sort-groceries-by-purchased", sortGroceryByPurchased);
 
 router.post("/create-grocery", createNewGrocery);
 
