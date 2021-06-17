@@ -41,6 +41,32 @@ let updateGrocerybyID = async function (req, res) {
   }
 };
 
+let updateGroceryWords = async function (req, res) {
+  try {
+    let updatedGroceryWords = await Grocery.findByIdAndUpdate(
+      req.params.id,
+      req.body,
+      { new: true }
+    );
+    res.json({ payload: updatedGroceryWords });
+  } catch (e) {
+    res.status(500).json({ message: e.message, error: e });
+  }
+};
+
+let updateGroceryPurchased = async function (req, res) {
+  try {
+    let updatedGroceryPurchase = await Grocery.findByIdAndUpdate(
+      req.params.id,
+      req.body,
+      { new: true }
+    );
+    res.json({ payload: updatedGroceryPurchase });
+  } catch (e) {
+    res.status(500).json({ message: e.message, error: e });
+  }
+};
+
 let deleteGrocerybyID = async function (req, res) {
   let { id } = req.params;
   try {
@@ -56,4 +82,6 @@ module.exports = {
   createNewGrocery,
   updateGrocerybyID,
   deleteGrocerybyID,
+  updateGroceryWords,
+  updateGroceryPurchased,
 };
