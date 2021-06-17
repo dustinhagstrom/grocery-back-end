@@ -12,7 +12,6 @@ const {
   sortGroceryByDate,
 } = require("./controller/groceryController");
 
-/* GET home page. */
 router.get("/get-all-groceries", getAllGroceries);
 
 router.get("/sort-groceries-date", sortGroceryByDate);

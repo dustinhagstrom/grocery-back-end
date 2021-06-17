@@ -45,8 +45,6 @@ let sortGroceryByPurchased = async function (req, res) {
 let createNewGrocery = async function (req, res) {
   let { grocery } = req.body;
   try {
-    //TODO
-    //get the new grocery item from req.body.grocery
     let newGroceryItem = await new Grocery({
       grocery: grocery,
     });
